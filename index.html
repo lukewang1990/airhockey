@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="style/airhockey.css">
+		<title>Airhockey</title>
+	</head>
+	<body>
+		<div>
+			<div class="game-title">
+				Air Hockey - Welcome
+			</div>
+			<div class="game-board">
+				<div class="score-board">
+					Invisible layer, only shown when the game is finished!
+				</div>
+				<div class="left-pane"> 	<!-- canvas -->
+					<canvas id="arena" width="320" height="480"></canvas>
+				</div>
+				<div class="right-pane"> 	<!-- control panel -->
+					<p>Control messages shown here</p>
+				</div>
+			</div>
+			<div class="game-bottom">
+				<p>Disclaimer: This is a testing message</p>
+				<p>This is the second paragraph</p>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="script/engine.js"></script>
+	<script type="text/javascript" src="script/canvas.js"></script>
+	<script type="text/javascript" src="script/control.js"></script>
+	<script type="text/javascript">
+		window.addEventListener('load', drawRectangle());
+	</script>
+</html>

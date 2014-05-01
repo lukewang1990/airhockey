@@ -17,6 +17,15 @@
 
 > * https://github.com/kripken/box2d.js
 
+### 3. AngularJS vs JQuery
+
+> * http://stackoverflow.com/questions/13151725/how-is-angular-js-different-from-jquery
+> * http://stackoverflow.com/questions/18414012/why-use-angularjs-instead-of-jquery
+
+### 4. HTML5 Canvas
+
+> * https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial
+
 ---
 
 ## Milestones
