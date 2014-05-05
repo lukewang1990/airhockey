@@ -25,6 +25,7 @@
 ### 4. HTML5 Canvas
 
 > * https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial
+> * http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
 
 ---
 

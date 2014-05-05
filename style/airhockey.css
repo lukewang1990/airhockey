@@ -1,8 +1,9 @@
 body {
-	font: sans-serif 18pt;
+	padding: 70px 0;
+	/*font: sans-serif 18pt;*/
 }
 
-.game-title {
+/*.game-title {
 	font-size: 24pt;
 	margin: 0 auto;
 }
@@ -55,4 +56,4 @@ body {
 	width: 640px;
 	border: solid 1px black;
 	margin: 0 auto;
-}
+}*/
