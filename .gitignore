@@ -1,11 +1,18 @@
+!.gitkeep
 ####################
 # specific ignored #
 ####################
-
-################
-# backup files #
-################
+logs/*
+!.gitkeep
+node_modules/
+bower_components/
+tmp
+.idea
+####################
+# Vim backup files #
+####################
 *~
+*.swp
 ###################
 # compiled source #
 ###################
@@ -22,26 +29,6 @@
 !/packages/*/lib/*.dll
 # Include dlls if they're in the CommonReferences directory
 !*CommonReferences/*.dll
-####################
-# VS Upgrade stuff #
-####################
-UpgradeLog.XML
-_UpgradeReport_Files/
-###############
-# Directories #
-###############
-bin/
-obj/
-TestResults/
-###################
-# Web publish log #
-###################
-*.Publish.xml
-#############
-# Resharper #
-#############
-/_ReSharper.*
-*.ReSharper.*
 ############
 # Packages #
 ############
@@ -60,6 +47,7 @@ TestResults/
 ######################
 *.log
 *.sqlite
+######################
 # OS generated files #
 ######################
 .DS_Store
