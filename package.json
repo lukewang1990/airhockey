@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "airhockey",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "description": "A web game based on AngularJS, Socket.IO and Box2D",
+  "repository": "https://github.com/lukewang1990/airhockey",
   "license": "MIT",
   "devDependencies": {
     "karma": "~0.10",

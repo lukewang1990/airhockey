@@ -1,15 +1,17 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "airhockey",
+  "description": "A web game based on AngularJS, Socket.IO and Box2D",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/lukewang1990/airhockey",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "angular": "1.2.x",
     "angular-route": "1.2.x",
+    "angular-resource": "~1.2.x",
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
+    "bootstrap": "~3.1.1",
     "html5-boilerplate": "~4.3.0"
   }
 }
