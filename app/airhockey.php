@@ -1,3 +1,11 @@
+<?php
+	require_once('session_module.php');
+	if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
+		$id_cookie = $_COOKIE['id_cookie'];
+		$session_cookie = $_COOKIE['session_cookie'];
+		if (sessionCheck($id_cookie, $session_cookie, $new_session_cookie, $err)) {
+?>
+
 <!DOCTYPE html>
 <html ng-app="airhockeyApp">
 <head>
@@ -32,10 +40,7 @@
 	            </li>
 	        </ul>
 	        <ul class="nav navbar-nav navbar-right">
-				<li><a href="#/register">Register</a></li>
-	        </ul>
-	        <ul class="nav navbar-nav navbar-right">
-	            <li><a href="#/login">Login</a></li>
+				<li><a href="logout_handle.php">Log out&nbsp;&nbsp;</a></li>
 	        </ul>
 	    </div>
 	</nav>
@@ -52,5 +57,19 @@
 	<script src="js/app.js"></script>
 	<script src="js/filters.js"></script>
 	<script src="js/directives.js"></script>
+	<script src="js/jquery.cookie.js"></script>
+	<script src="js/helper.js"></script>
 </body>
 </html>
+
+<?php
+		} else {
+			// redirect to login page
+			redirect('login.php');
+		}
+	} else {
+		// redirect to login page
+		redirect('login.php');
+	}
+
+?>
