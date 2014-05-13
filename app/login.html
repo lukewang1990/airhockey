@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Airhockey</title>
+    <title>Login</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/app.css">
@@ -32,9 +32,16 @@
         </div>
     </nav>
     <div class="container">
-        <div class="page-header">
-            <h1>Air Hockey<small>Challenge your Opponent</small></h1>
-        </div>
+        <form class="form-signin" role="form">
+            <h2 class="form-signin-heading">Please sign in</h2>
+            <input class="form-control" type="email" autofocus="" required="" placeholder="Email address" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAA…nt: scroll; background-position: right center; cursor: auto;" autocomplete="off"></input>
+            <input class="form-control" type="password" required="" placeholder="Password" style="background-image: url("data:image/png;base64,iVBORw0KGgoAAAA…round-attachment: scroll; background-position: right center;" autocomplete="off"></input>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"></input>
+                Remember me
+            </label>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
     </div>
 
     <script src="bower_components/jquery/dist/jquery.js"></script>

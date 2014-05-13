@@ -8,11 +8,3 @@ angular.module('airhockeyApp.filters', []).
       return String(text).replace(/\%VERSION\%/mg, version);
     };
   }]);
-
-/* Sample */
-angular.module('myApp.filters', []).
-  filter('interpolate', ['version', function(version) {
-    return function(text) {
-      return String(text).replace(/\%VERSION\%/mg, version);
-    };
-  }]);
