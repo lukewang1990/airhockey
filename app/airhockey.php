@@ -1,9 +1,9 @@
 <?php
-	require_once('session_module.php');
-	if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
-		$id_cookie = $_COOKIE['id_cookie'];
-		$session_cookie = $_COOKIE['session_cookie'];
-		if (sessionCheck($id_cookie, $session_cookie, $new_session_cookie, $err)) {
+	// require_once('session_module.php');
+	// if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
+	// 	$id_cookie = $_COOKIE['id_cookie'];
+	// 	$session_cookie = $_COOKIE['session_cookie'];
+	// 	if (sessionCheck($id_cookie, $session_cookie, $new_session_cookie, $err)) {
 ?>
 
 <!DOCTYPE html>
@@ -42,53 +42,72 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3" id="control-panel">
-                big pic of mole
+                <a class="thumbnail">
+         		<img src="tywong.jpg">
+     			</a>
+     			player ID:<br/>
+     			Score:
             </div>
             <div class="col-xs-9" id="list-container">
+
                 <div class="row">
                     <div class="col-xs-6">
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">Bar Shape</a></li>
-                            <li><a href="#">Round Shape</a></li>
+                            <li class="active" id="BarShape"><a>Bar Shape</a></li>
+                            <li id="RoundShape"><a>Round Shape</a></li>
                         </ul>
                     </div>
                     <div class="col-xs-6">
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">2 Players</a></li>
-                            <li><a href="#">4 Players</a></li>
+                            <li class="active" id="2PlayerMode"><a>2 Players</a></li>
+                            <li id="4PlayerMode"><a>4 Players</a></li>
                         </ul>
                     </div>
                 </div>
+
                 <div class="row">
-                    <ul class="list-group">
+
+                    <ul class="list-group" id="room-list">
                         <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
                     </ul>
+                   
                 </div>
+
+                <div class="row">
+
+                	 <div class="btn-group btn-group-justified">
+						  <div class="btn-group">
+						    <button type="button" class="btn btn-success" id="auto-join">Auto Join</button>
+						  </div>
+
+						  <div class="btn-group">
+						    <button type="button" class="btn btn-danger" id='new-room'>New Game Room</button>
+						  </div>
+					</div>
+				</div>
                 
             </div>
 
         </div>
     </div>
 
-	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
+	<script src="js/socket.io.min.js"></script>
+	<script src="js/matching.js"></script>
 </body>
 </html>
 
 <?php
-		} else {
-			// redirect to login page
-			redirect('login.php');
-		}
-	} else {
-		// redirect to login page
-		redirect('login.php');
-	}
+	// 	} else {
+	// 		// redirect to login page
+	// 		redirect('login.php');
+	// 	}
+	// } else {
+	// 	// redirect to login page
+	// 	redirect('login.php');
+	// }
 
 ?>

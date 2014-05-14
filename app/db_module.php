@@ -2,7 +2,7 @@
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
-define('DB_PASS', 'gx1217gx');
+define('DB_PASS', 'xampp');
 define('DB_NAME', 'airhockey');
 define('DB_PORT', '3306'); 
 
