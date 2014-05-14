@@ -41,10 +41,17 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-3" id="control-panel">
-                <a class="thumbnail">
-         		<img src="img/tywong.jpg">
-     			</a>
-     			player ID:<br/>
+                <div class="row">
+	                <a class="thumbnail">
+	         			<img src="img/tywong.jpg">
+	     			</a>
+	     		</div>
+	     		<div class="row">
+					<div class="row" style="margin: 5px 0;">
+	                	<span class="col-xs-6 label label-info">Nickname</span>
+	                	<span class="col-xs-6 label label-primary" id="nickname">&nbsp;</span>
+	                </div>
+	     		</div>
             </div>
             <div class="col-xs-9" id="list-container">
 
