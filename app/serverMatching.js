@@ -1,40 +1,28 @@
 var io = require('socket.io').listen(8080);
-
+io.set('log level', 1);
 var gamelobby = io.of('/gamelobby');
 
 var playerInRoomState = new Object();
-var onLeaveTimeOut = new Object();
-
-io.set('log level', 1);
-
 var roomList = new Object();
+
+
 // roomList[1] =  {shape:"BarShape", player:2, occupied: 2, playerList:{"1":1,"2":1}, readyPlayerList:{}, roomId: 1, state:'waiting'};
-// roomList[2] =  {shape:"BarShape", player:2, occupied: 2, playerList:{"4":1,"5":1}, readyPlayerList:{}, roomId: 2, state:'waiting'};
-// roomList[3] =  {shape:"BarShape", player:2, occupied: 1, playerList:{"6":1}, readyPlayerList:{}, roomId: 3, state:'waiting'};
-// roomList[4] =  {shape:"BarShape", player:4, occupied: 2, playerList:{"14":1,"16":1}, readyPlayerList:{}, roomId: 4, state:'waiting'};
-// roomList[5] =  {shape:"BarShape", player:4, occupied: 3, playerList:{"12":1,"31":1,"45":1}, readyPlayerList:{}, roomId: 5, state:'waiting'};
-// roomList[6] =  {shape:"RoundShape", player:4, occupied: 3, playerList:{"2":1,"9":1,"41":1}, readyPlayerList:{}, roomId: 6, state:'waiting'};
-// roomList[7] =  {shape:"RoundShape", player:2, occupied: 2, playerList:{"71":1,"73":1}, readyPlayerList:{}, roomId: 7, state:'waiting'};
-// roomList[8] =  {shape:"RoundShape", player:2, occupied: 2, playerList:{"74":1,"75":1}, readyPlayerList:{}, roomId: 8, state:'waiting'};
-// roomList[9] =  {shape:"RoundShape", player:2, occupied: 1, playerList:{"76":1}, readyPlayerList:{}, roomId: 9, state:'waiting'};
-// roomList[10] =  {shape:"RoundShape", player:4, occupied: 2, playerList:{"714":1,"716":1}, readyPlayerList:{}, roomId: 10, state:'waiting'};
-// roomList[11] =  {shape:"RoundShape", player:4, occupied: 3, playerList:{"712":1,"731":1,"745":1}, readyPlayerList:{}, roomId: 11, state:'waiting'};
 // roomList[12] =  {shape:"RoundShape", player:4, occupied: 3, playerList:{"102":1,"49":1,"741":1}, readyPlayerList:{}, roomId: 12, state:'waiting'};
 
 gamelobby.on('connection', function (socket) {
-  console.log("connected");
 
   socket.on('playerid register', function (playerid, inroom){
-  	console.log("playerid reg: "+playerid+" inroom: "+inroom);
+  	console.log("player: "+playerid+" is on line. In room ? "+inroom);
   	socket.playerid = playerid;
   	playerInRoomState[playerid] = inroom;
+  	if (inroom!=false){
+  		var roomId = inroom;
+      	roomList[roomId].occupied++;
+      	roomList[roomId].playerList[socket.playerid] = 1;
+      	playerInRoomState[socket.playerid] = true;
+      	replyAll();
 
-  	if (socket.playerid in onLeaveTimeOut){
-      console.log('this is reached');
-  		clearTimeout(onLeaveTimeOut[socket.playerid]);
-  		delete onLeaveTimeOut[socket.playerid];
   	}
-
   	socket.emit('playerid register ok');
 
   });
@@ -70,11 +58,11 @@ gamelobby.on('connection', function (socket) {
 	  	room.roomId = roomId;
 	  	room.shape = requestMode.shape;
 	  	room.player = requestMode.player;
-	  	room.occupied = 1;
+	  	room.occupied = 0;
 	  	room.playerList = new Object();
 	  	room.readyPlayerList = new Object();
-	  	room.playerList[socket.playerid] = 1;
-	  	playerInRoomState[socket.playerid] = true;
+	  	// room.playerList[socket.playerid] = 1;
+	  	// playerInRoomState[socket.playerid] = true;
 	  	room.state = 'waiting';
 	  	roomList[roomId] = room;
 	  	socket.emit("new room success", roomId);
@@ -101,9 +89,9 @@ gamelobby.on('connection', function (socket) {
 			socket.emit('auto join fail');
 		else{
 			roomId = found[Math.floor((Math.random()*found.length))];
-	      	roomList[roomId].occupied++;
-	      	roomList[roomId].playerList[socket.playerid] = 1;
-	      	playerInRoomState[socket.playerid] = true;
+	      	// roomList[roomId].occupied++;
+	      	// roomList[roomId].playerList[socket.playerid] = 1;
+	      	// playerInRoomState[socket.playerid] = true;
 	      	socket.emit('auto join success', roomId);
 	      	replyAll();
 		}
@@ -118,8 +106,14 @@ gamelobby.on('connection', function (socket) {
   		if ((socket.playerid in roomList[roomId].playerList)
   			&& !(socket.playerid in roomList[roomId].readyPlayerList)){
   			roomList[roomId].readyPlayerList[socket.playerid] = 1;
-  			console.log('Player ' + socket.playerid + 'says he is ready.');
-        break;
+  		  	gamelobby.emit('ready list', roomId, roomList[roomId].readyPlayerList);
+  		  	if (Object.keys(roomList[roomId].readyPlayerList[socket.playerid]).length == roomList[roomId].player){
+  		  		roomList[roomId].state = 'in game';
+  		  		replyAll();
+  		  		console.log('Game started in room '+roomId);
+  		  	}
+  			console.log('Player ' + socket.playerid + ' is ready to play in room ' + roomId);
+	        break;
   		}
 
   })
@@ -135,24 +129,14 @@ gamelobby.on('connection', function (socket) {
 
 
   socket.on('disconnect', function () {
-  		console.log("disconnecting");
   	  	for (var roomId in roomList){
   			if (socket.playerid in (roomList[roomId].playerList)) {
-  				console.log('now player '+ socket.playerid +' is in room '+roomId);
+					console.log("player "+ sid +" is now offline from room "+rid);
 
-  				onLeaveTimeOut[socket.playerid] =  setTimeout(function(){
-  					var rid = roomId;
-  					var sid = socket.playerid;
-  					return function(){
-  						
-  						console.log("player "+sid+" is now offline from room "+rid);
+	  				delete roomList[rid].playerList[sid];
+	  				if (socket.playerid in roomList[rid].readyPlayerList)
+	  					delete roomList[rid].readyPlayerList[sid];
 
-		  				delete roomList[rid].playerList[sid];
-		  				if (socket.playerid in roomList[rid].readyPlayerList)
-		  					delete roomList[rid].readyPlayerList[sid];
-			  		}
-
-  				}(), 10000);
   			}
   		}
   });
