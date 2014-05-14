@@ -126,7 +126,18 @@ gamelobby.on('connection', function (socket) {
 	        break;
   		}
 
-  })
+  });
+
+  socket.on('game end', function(){
+  	for (var roomId in roomList)
+  		if (socket.playerid in roomList[roomId].playerList){
+  			roomList[roomId].state = 'waiting';
+  			roomList[roomId].readyPlayerList = {};
+  			bcReadyList();
+  			replyAll();
+  		}
+
+  });
 
   // socket.on('cancel ready', function(){
   // 	for (var roomId in roomList)
