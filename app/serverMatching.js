@@ -107,7 +107,7 @@ gamelobby.on('connection', function (socket) {
   			&& !(socket.playerid in roomList[roomId].readyPlayerList)){
   			roomList[roomId].readyPlayerList[socket.playerid] = 1;
   		  	gamelobby.emit('ready list', roomId, roomList[roomId].readyPlayerList);
-  		  	if (Object.keys(roomList[roomId].readyPlayerList[socket.playerid]).length == roomList[roomId].player){
+  		  	if (Object.keys(roomList[roomId].readyPlayerList).length == roomList[roomId].player){
   		  		roomList[roomId].state = 'in game';
   		  		replyAll();
   		  		console.log('Game started in room '+roomId);
