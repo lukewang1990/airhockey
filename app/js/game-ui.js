@@ -67,9 +67,11 @@ $(document).ready(function(event) {
 
 	// initialize socket.io connections
 	var scoreConn = io.connect('http://localhost:8080/score'),
-		playerConn = io.connect('http://localhost:8080/player'),
 		lobbyConn = io.connect('http://localhost:8080/gamelobby');
-  
+
+	// notify the game controller that the player is in the game
+	lobbyConn.emit('playerid register', playerID, true);
+
 	scoreConn.on('score-update', function () {
 		console.log(data);
 		$('#self-score').children('span').html(data[selfTeam]);

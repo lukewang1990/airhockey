@@ -3,8 +3,8 @@ var socket = io.connect('http://localhost:8080/gamelobby');
 var requestMode = new Object();
 requestMode.player = 2;
 requestMode.shape = "BarShape";
-// var playerid = localStorage.getItem('playerID');
-var playerid = '10301';
+var playerid = localStorage.getItem('playerID');
+console.log(playerid);
 socket.emit('playerid register', playerid, false);
 
 socket.on('playerid register ok', function (){
@@ -87,7 +87,7 @@ socket.on('playerid register ok', function (){
 		localStorage.setItem('numPlayer', requestMode.player);
 		localStorage.setItem('shape', requestMode.shape);
 		localStorage.setItem('roomId', roomId);
-
+		window.location = 'game.php';
 	});
 
 	socket.on('auto join success', function (roomId){
@@ -96,6 +96,7 @@ socket.on('playerid register ok', function (){
 		localStorage.setItem('numPlayer', requestMode.player);
 		localStorage.setItem('shape', requestMode.shape);
 		localStorage.setItem('roomId', roomId);
+		window.location = 'game.php';
 	});
 
 	socket.on('auto join fail', function(){

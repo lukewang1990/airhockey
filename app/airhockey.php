@@ -1,9 +1,9 @@
 <?php
-	// require_once('session_module.php');
-	// if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
-	// 	$id_cookie = $_COOKIE['id_cookie'];
-	// 	$session_cookie = $_COOKIE['session_cookie'];
-	// 	if (sessionCheck($id_cookie, $session_cookie, $new_session_cookie, $err)) {
+	require_once('session_module.php');
+	if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
+		$id_cookie = $_COOKIE['id_cookie'];
+		$session_cookie = $_COOKIE['session_cookie'];
+		if (sessionCheck($id_cookie, $session_cookie, $new_session_cookie, $err)) {
 ?>
 
 <!DOCTYPE html>
@@ -99,13 +99,13 @@
 </html>
 
 <?php
-	// 	} else {
-	// 		// redirect to login page
-	// 		redirect('login.php');
-	// 	}
-	// } else {
-	// 	// redirect to login page
-	// 	redirect('login.php');
-	// }
+		} else {
+			// redirect to login page
+			redirect('login.php');
+		}
+	} else {
+		// redirect to login page
+		redirect('login.php');
+	}
 
 ?>
