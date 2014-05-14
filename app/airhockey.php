@@ -46,7 +46,6 @@
          		<img src="tywong.jpg">
      			</a>
      			player ID:<br/>
-     			Score:
             </div>
             <div class="col-xs-9" id="list-container">
 
