@@ -73,6 +73,13 @@ $(document).ready(function(event) {
 	// notify the game controller that the player is in the game
 	lobbyConn.emit('playerid register', playerID, roomID);
 
+	lobbyConn.on('ready list', function(roomId, readyList){
+		if (localStorage.getItem('roomId') == roomId){
+			localStorage.setItem('readyList', readyList);
+		}
+	});
+	
+
 	scoreConn.on('score-update', function () {
 		console.log(data);
 		$('#self-score').children('span').html(data[selfTeam]);

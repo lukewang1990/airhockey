@@ -10,10 +10,9 @@ var roomList = new Object();
 // roomList[12] =  {shape:"RoundShape", player:4, occupied: 3, playerList:{"102":1,"49":1,"741":1}, readyPlayerList:{}, roomId: 12, state:'waiting'};
 
 gamelobby.on('connection', function (socket) {
-  console.log("connected");
 
   socket.on('playerid register', function (playerid, inroom){
-  	console.log("playerid reg: "+playerid+" inroom: "+inroom);
+  	console.log("player: "+playerid+" is on line. In room ? "+inroom);
   	socket.playerid = playerid;
   	playerInRoomState[playerid] = inroom;
   	if (inroom!=false){
@@ -107,8 +106,14 @@ gamelobby.on('connection', function (socket) {
   		if ((socket.playerid in roomList[roomId].playerList)
   			&& !(socket.playerid in roomList[roomId].readyPlayerList)){
   			roomList[roomId].readyPlayerList[socket.playerid] = 1;
-  			console.log('Player ' + socket.playerid + ' is ready.');
-        break;
+  		  	gamelobby.emit('ready list', roomId, roomList[roomId].readyPlayerList);
+  		  	if (Object.keys(roomList[roomId].readyPlayerList[socket.playerid]).length == roomList[roomId].player){
+  		  		roomList[roomId].state = 'in game';
+  		  		replyAll();
+  		  		console.log('Game started in room '+roomId);
+  		  	}
+  			console.log('Player ' + socket.playerid + ' is ready to play in room ' + roomId);
+	        break;
   		}
 
   })
@@ -124,11 +129,8 @@ gamelobby.on('connection', function (socket) {
 
 
   socket.on('disconnect', function () {
-  		console.log("disconnecting");
   	  	for (var roomId in roomList){
   			if (socket.playerid in (roomList[roomId].playerList)) {
-  				console.log('now player '+ socket.playerid +' is in room '+roomId);
-
 					console.log("player "+ sid +" is now offline from room "+rid);
 
 	  				delete roomList[rid].playerList[sid];
