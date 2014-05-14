@@ -133,7 +133,7 @@ gamelobby.on('connection', function (socket) {
   		if (socket.playerid in roomList[roomId].playerList){
   			roomList[roomId].state = 'waiting';
   			roomList[roomId].readyPlayerList = {};
-  			bcReadyList();
+  			bcReadyList(roomId);
   			replyAll();
   		}
 
@@ -156,7 +156,8 @@ gamelobby.on('connection', function (socket) {
 
   				delete roomList[roomId].playerList[socket.playerid];
   				playerInRoomState[socket.playerid]= false;
-
+  				roomList[roomId].state = 'waiting';
+  				
   				if (socket.playerid in roomList[roomId].readyPlayerList)
   					delete roomList[roomId].readyPlayerList[socket.playerid];
   				bcReadyList(roomId);
