@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
 	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/game-style.css">
 </head>
 <body>
 	<nav role="navigation" class="navbar navbar-default navbar-fixed-top">
@@ -80,7 +81,9 @@
             </div>
             <div class="col-xs-9" id="board-container">
                 <div class="container">
-					<div style="width:400px;height:400px;background:black;"></div>
+					<div id="game_container">
+						<div id="note_pad"></div>
+					</div>
                 </div>
                 
                 
@@ -95,6 +98,7 @@
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
 	<script src="js/game-ui.js"></script>
+	<script src="js/game-client.js"></script>
 </body>
 </html>
 <?php

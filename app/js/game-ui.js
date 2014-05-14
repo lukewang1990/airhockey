@@ -12,6 +12,8 @@ $(document).ready(function(event) {
 	$('#game-num').html(num);
 	$('#nickname').html(name);
 
+	setGame(playerID, roomID ,num, shape);
+
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
 // 	data[0] = {name:'Lance',state:'true'};
