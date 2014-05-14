@@ -84,13 +84,18 @@ socket.on('playerid register ok', function (){
 	socket.on("new room success", function (roomId){
 
 		console.log('new room success');
+		localStorage.setItem('numPlayer', requestMode.player);
+		localStorage.setItem('shape', requestMode.shape);
+		localStorage.setItem('roomId', roomId);
 
 	});
 
 	socket.on('auto join success', function (roomId){
 
 		console.log("auto join success, you are in room "+ roomId );
-
+		localStorage.setItem('numPlayer', requestMode.player);
+		localStorage.setItem('shape', requestMode.shape);
+		localStorage.setItem('roomId', roomId);
 	});
 
 	socket.on('auto join fail', function(){
