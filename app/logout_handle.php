@@ -8,6 +8,8 @@ if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
 	setcookie ('id_cookie', $id_cookie, time() - 3600, '/');
 	setcookie('session_cookie', $session_cookie, time() - 3600, '/');
 	redirect('index.html');
+} else {
+	redirect('index.html');
 }
 
 ?>
