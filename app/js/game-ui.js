@@ -31,6 +31,22 @@ function updatePlayerList() {
 
 }
 
+// data is two element array
+function updateScoreboard(data) {
+	// update view
+	$('#self-score').children('span').html(data[selfTeam]);
+	$('#opponent-score').children('span').html(data[1 - selfTeam]);
+
+	// check if game ends
+	if (data[0] == 5 && selfTeam == 0 || data[1] == 5 && selfTeam == 1) {
+		lobbyConn.emit('game end', '');
+		$('#opponent-score').addClass('list-group-item-info');
+	} else if (data[0] == 5 && selfTeam == 1 || data[1] == 5 && selfTeam == 0) {
+		lobbyConn.emit('game end', '');
+		$('#opponent-score').addClass('list-group-item-info');
+	}
+}
+
 $(document).ready(function(event) {
 	// read and set the game info fields
 	var shape = localStorage.getItem('shape');
@@ -127,33 +143,8 @@ $(document).ready(function(event) {
 	});
 
 	lobbyConn.on('nickname mapping', function(data) {
-		console.log(data);
+		// console.log(data);
 		localStorage.setItem('mapping', data);
-	});
-	
-	// prepare data to send to the game server
-	data = new Object();
-	data.readyList = localStorage.getItem('readyList');
-	data.num = num;
-	data.score = 5;
-	data.shape = shape;
-	// gameConn.emit('enter config', data);
-
-	scoreConn.on('score-update', function () {
-		console.log(data);
-		
-		// update view
-		$('#self-score').children('span').html(data[selfTeam]);
-		$('#opponent-score').children('span').html(data[1 - selfTeam]);
-
-		// check if game ends
-		if (data[0] == 5 && selfTeam == 0 || data[1] == 5 && selfTeam == 1) {
-			lobbyConn.emit('game end', '');
-			$('#opponent-score').addClass('list-group-item-info');
-		} else if (data[0] == 5 && selfTeam == 1 || data[1] == 5 && selfTeam == 0) {
-			lobbyConn.emit('game end', '');
-			$('#opponent-score').addClass('list-group-item-info');
-		}
 	});
 
 	// add event listeners
@@ -161,9 +152,7 @@ $(document).ready(function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 
-		if (selfTeam === undefined) {
-			console.log('the nickname is not in the full player list');
-		}
+		$(this).prop('disabled', true);
 		// send data
 		lobbyConn.emit('game ready', playerID);
 		// gameConn.emit('game ready', playerID);
