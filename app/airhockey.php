@@ -67,7 +67,6 @@
                 <div class="row">
 
                     <ul class="list-group" id="room-list">
-                        <li class="list-group-item">Cras justo odio</li>
                     </ul>
                    
                 </div>
