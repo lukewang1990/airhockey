@@ -114,7 +114,6 @@ socket.on('playerid register ok', function (){
 	});
 	// roomList.push({shape:"RoundShape", player:4, occupied: 3, playerList:[102,49,741], roomId: 12});
 
-
 	function updateRoomList(data){
 		document.getElementById("room-list").innerHTML='';
 		for (var i = 0; i < data.length; i++){
