@@ -73,6 +73,8 @@ $(document).ready(function(event) {
 		console.log('invalid number of player parameter encountered');
 	}
 
+	setGame(playerID, roomID ,num, shape, localStorage.getItem('readyList'));
+
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
 // 	data[0] = {name:'Lance',state:'true'};
@@ -142,11 +144,6 @@ $(document).ready(function(event) {
 		}
 	});
 
-	lobbyConn.on('nickname mapping', function(data) {
-		// console.log(data);
-		localStorage.setItem('mapping', data);
-	});
-
 	// add event listeners
 	$('#ready-button').click(function(event) {
 		event.preventDefault();
@@ -155,6 +152,7 @@ $(document).ready(function(event) {
 		$(this).prop('disabled', true);
 		// send data
 		lobbyConn.emit('game ready', playerID);
+		game_ready_clicked();
 		// gameConn.emit('game ready', playerID);
 	});
 
