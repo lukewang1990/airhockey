@@ -7,6 +7,7 @@ $(document).ready(function(event) {
 	var num = localStorage.getItem('numPlayer');
 	var name = localStorage.getItem('nickname');
 	var playerID = localStorage.getItem('playerID');
+	var roomID = localStorage.getItem('roomId');
 	$('#game-shape').html(shape);
 	$('#game-num').html(num);
 	$('#nickname').html(name);
@@ -70,7 +71,7 @@ $(document).ready(function(event) {
 		lobbyConn = io.connect('http://localhost:8080/gamelobby');
 
 	// notify the game controller that the player is in the game
-	lobbyConn.emit('playerid register', playerID, true);
+	lobbyConn.emit('playerid register', playerID, roomID);
 
 	scoreConn.on('score-update', function () {
 		console.log(data);
@@ -78,7 +79,7 @@ $(document).ready(function(event) {
 		$('#opponent-score').children('span').html(data[1 - selfTeam]);
 	});
   
-	playerConn.on('list-update', function (data) {
+	lobbyConn.on('list-update', function (data) {
 		for (var i = 0; i < data.length; i++) {
 			var element = $('#player-list li:nth-child(' + (i + 1) +')');
 			element.children('.player-name').html(data[i].name);
@@ -125,6 +126,11 @@ $(document).ready(function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		window.location = 'airhockey.php';
+	});
+
+	$('#logout-button').click(function(event) {
+		event.stopPropagation;
+		localStorage.clear();
 	});
 
 });

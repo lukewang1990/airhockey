@@ -10,7 +10,7 @@ $playerID;
 $resObj = array();
 if (! empty($email) && ! empty($nickname) && ! empty($password)) {
 	try {
-		require_once 'db_module.php';
+		require_once 'php_module/db_module.php';
 		$conn = mysqlConnector();
 		// check if the email has been used
 		$stmt = $conn->prepare("SELECT uid FROM users WHERE email=\"$email\"");
@@ -34,7 +34,7 @@ if (! empty($email) && ! empty($nickname) && ! empty($password)) {
 }
 
 if (empty($resObj['error'])) { 	// registration successful
-	require_once('session_module.php');
+	require_once('php_module/session_module.php');
 	$id_cookie = "";
 	$session_cookie = "";
 	if (sessionGen($id_cookie, $session_cookie, $email, $errMsg)) {

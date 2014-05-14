@@ -11,7 +11,7 @@ $playerID;
 $resObj = array();
 if (! empty($email) && ! empty($password) && ! empty($persistent)) {
 	try {
-		require_once 'db_module.php';
+		require_once 'php_module/db_module.php';
 		$conn = mysqlConnector();
 		// check if the email has been used
 		$stmt = $conn->prepare("SELECT * FROM users WHERE email=\"$email\" AND password=\"$password\"");
@@ -33,7 +33,7 @@ if (! empty($email) && ! empty($password) && ! empty($persistent)) {
 }
 
 if (empty($resObj['error'])) { 	// login successful
-	require_once('session_module.php');
+	require_once('php_module/session_module.php');
 	if (isset($_COOKIE['id_cookie'])) {
 		$id_cookie = $_COOKIE['id_cookie'];
 		if (! findIdCookie($id_cookie, $email, $err)) {

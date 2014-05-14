@@ -1,5 +1,5 @@
 <?php
-    require_once('session_module.php');
+    require_once('php_module/session_module.php');
     if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie']) && sessionCheck($_COOKIE['id_cookie'], $_COOKIE['session_cookie'], $new_session_cookie, $err)) {
         // redirect to game app
         redirect('airhockey.php');

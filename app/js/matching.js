@@ -11,7 +11,6 @@ socket.on('playerid register ok', function (){
 
 	console.log('playerid registered');
 
-
 });
 
 	socket.emit('update room list', requestMode);
@@ -58,6 +57,11 @@ socket.on('playerid register ok', function (){
 
 		socket.emit('new room', requestMode);
 
+	});
+
+	$('#logout-button').click(function(event) {
+		event.stopPropagation;
+		localStorage.clear();
 	});
 
 	socket.on('BarShape 2PlayerMode', function (data){

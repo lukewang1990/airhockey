@@ -1,5 +1,5 @@
 <?php
-	require_once('session_module.php');
+	require_once('php_module/session_module.php');
 	if (isset($_COOKIE['id_cookie']) && isset($_COOKIE['session_cookie'])) {
 		$id_cookie = $_COOKIE['id_cookie'];
 		$session_cookie = $_COOKIE['session_cookie'];
@@ -31,10 +31,9 @@
 	    <div id="navbarCollapse" class="collapse navbar-collapse">
 	        <ul class="nav navbar-nav">
 	            <li><a href="index.html">Home</a></li>
-				<li class="active"><a href="airhockey.php">Game</a></li>
 	        </ul>
 	        <ul class="nav navbar-nav navbar-right">
-				<li><a href="logout_handle.php">Log out&nbsp;&nbsp;</a></li>
+				<li><a href="logout_handle.php" id="logout-button">Log out&nbsp;&nbsp;</a></li>
 	        </ul>
 	    </div>
 	</nav>
