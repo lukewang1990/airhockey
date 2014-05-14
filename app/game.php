@@ -43,15 +43,15 @@
             <div class="col-xs-3" id="control-panel">
                 <div class="row" style="margin: 5px 0;">
                 	<span class="col-xs-6 label label-info">Welcome</span>
-                	<span class="col-xs-6 label label-primary" id="nickname">Luke</span>
+                	<span class="col-xs-6 label label-primary" id="nickname">&nbsp;</span>
                 </div>
                 <div class="row" style="margin: 5px 0;">
                    	<span class="col-xs-6 label label-info">Game type</span>
-                	<span class="col-xs-6 label label-success" id="game-shape">bar</span>
+                	<span class="col-xs-6 label label-success" id="game-shape">&nbsp;</span>
                 </div>
                 <div class="row" style="margin: 5px 0;">
                 	<span class="col-xs-6 label label-info">Number of players</span>
-                	<span class="col-xs-6 label label-warning" id="game-num">2</span>
+                	<span class="col-xs-6 label label-warning" id="game-num">&nbsp;</span>
                 </div>
                 <div class="row">
 	            	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin: 20px 0;" id="ready-button">
@@ -60,16 +60,16 @@
                 </div>
                 <div class="row">
                 <ul class="list-group">
-                	<li class="list-group-item" id="self-score"><span class="badge">1</span>You</li>
-                	<li class="list-group-item" id="opponent-score"><span class="badge">2</span>Opponent</li>
+                	<li class="list-group-item" id="self-score"><span class="badge">&nbsp;</span>You</li>
+                	<li class="list-group-item" id="opponent-score"><span class="badge">&nbsp;</span>Opponent</li>
                 </ul>
                 </div>
                 <div class="row">
                 	<ul class="list-group" id="player-list">
-                		<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
-						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
-						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
-						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
+                		<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
                 	</ul>
                 </div>
                 <div class="row">
