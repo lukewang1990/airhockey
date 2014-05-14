@@ -44,7 +44,7 @@ $(document).ready(function(event) {
 
         // callback handler that will be called on success
         request.done(function (data, textStatus, jqXHR) {
-            console.log("response: " + data);
+            // console.log("response: " + data);
             var res = JSON.parse(data);
             if (res.success == 'true') {
                 // set cookies accordingly
@@ -59,14 +59,15 @@ $(document).ready(function(event) {
                 }
 
             } else {
-                console.error(res.error);
+                alert(res.error);
+                $('#email').focus();
             }
         });
 
         // callback handler that will be called on failure
         request.fail(function (jqXHR, textStatus, errorThrown) {
             // log the error to the console
-            console.error(
+            alert(
                 "The following error occured: "+
                 textStatus, errorThrown
             );

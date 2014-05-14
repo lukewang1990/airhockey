@@ -18,6 +18,7 @@ function updatePlayerList() {
 			} else {
 				selfTeam = 1;
 			}
+			console.log('selfTeam is ' + selfTeam);
 		}
 
 		if (readyObj[k] == '0') {
@@ -55,8 +56,6 @@ $(document).ready(function(event) {
 	} else {
 		console.log('invalid number of player parameter encountered');
 	}
-
-	updatePlayerList();
 
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
@@ -119,14 +118,16 @@ $(document).ready(function(event) {
 	// notify the game controller that the player is in the game
 	lobbyConn.emit('playerid register', playerID, roomID, name);
 
-	lobbyConn.on('ready list', function(roomId, readyList){
+	lobbyConn.on('ready list', function(roomId, readyList, mapping){
 		if (localStorage.getItem('roomId') == roomId){
 			localStorage.setItem('readyList', readyList);
+			localStorage.setItem('mapping', mapping);
 			updatePlayerList();
 		}
 	});
 
 	lobbyConn.on('nickname mapping', function(data) {
+		console.log(data);
 		localStorage.setItem('mapping', data);
 	});
 	
