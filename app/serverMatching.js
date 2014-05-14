@@ -22,7 +22,7 @@ gamelobby.on('connection', function (socket) {
   	socket.playerid = playerid;
   	id2name[playerid] = nickname;
   	playerInRoomState[playerid] = inroom;
-  	if (inroom!=false){
+  	if (inroom !=false && (inroom in roomList)){
   		var roomId = inroom;
       	roomList[roomId].occupied++;
       	roomList[roomId].playerList[socket.playerid] = 1;
@@ -171,9 +171,7 @@ function bcReadyList(roomId){
 	for (var playerid in roomList[roomId].readyPlayerList)
 		replyObj[playerid] = 1;
 
-	gamelobby.emit('ready list', roomId, JSON.stringify(replyObj));
-	gamelobby.emit('nickname mapping', JSON.stringify(id2name));
-
+	gamelobby.emit('ready list', roomId, JSON.stringify(replyObj), JSON.stringify(id2name));
 
 }
 
