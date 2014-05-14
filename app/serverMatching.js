@@ -126,7 +126,18 @@ gamelobby.on('connection', function (socket) {
 	        break;
   		}
 
-  })
+  });
+
+  socket.on('game end', function(){
+  	for (var roomId in roomList)
+  		if (socket.playerid in roomList[roomId].playerList){
+  			roomList[roomId].state = 'waiting';
+  			roomList[roomId].readyPlayerList = {};
+  			bcReadyList(roomId);
+  			replyAll();
+  		}
+
+  });
 
   // socket.on('cancel ready', function(){
   // 	for (var roomId in roomList)
@@ -145,7 +156,8 @@ gamelobby.on('connection', function (socket) {
 
   				delete roomList[roomId].playerList[socket.playerid];
   				playerInRoomState[socket.playerid]= false;
-
+  				roomList[roomId].state = 'waiting';
+  				
   				if (socket.playerid in roomList[roomId].readyPlayerList)
   					delete roomList[roomId].readyPlayerList[socket.playerid];
   				bcReadyList(roomId);
