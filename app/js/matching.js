@@ -5,7 +5,7 @@ requestMode.player = 2;
 requestMode.shape = "BarShape";
 var playerid = localStorage.getItem('playerID');
 var nickname = localStorage.getItem('nickname');
-socket.emit('playerid register', playerid, false);
+socket.emit('playerid register', playerid, false, nickname);
 
 socket.on('playerid register ok', function (){
 
@@ -65,7 +65,7 @@ socket.on('playerid register ok', function (){
 	});
 
 	$('#nickname').html(nickname);
-	
+
 	socket.on('BarShape 2PlayerMode', function (data){
 		if ($("#BarShape").hasClass("active") && $("#2PlayerMode").hasClass("active"))
 			updateRoomList(data);

@@ -4,7 +4,7 @@ var gamelobby = io.of('/gamelobby');
 
 var playerInRoomState = new Object();
 var roomList = new Object();
-
+var id2name = new Object();
 //on game end:
 // 1. change the state of the room into 'waiting'
 // 2. clear readyPlayerList
@@ -17,9 +17,10 @@ var roomList = new Object();
 
 gamelobby.on('connection', function (socket) {
 
-  socket.on('playerid register', function (playerid, inroom){
+  socket.on('playerid register', function (playerid, inroom, nickname){
   	console.log("player: "+playerid+" is on line. In room ? "+inroom);
   	socket.playerid = playerid;
+  	id2name[playerid] = nickname;
   	playerInRoomState[playerid] = inroom;
   	if (inroom!=false){
   		var roomId = inroom;
@@ -171,6 +172,7 @@ function bcReadyList(roomId){
 		replyObj[playerid] = 1;
 
 	gamelobby.emit('ready list', roomId, JSON.stringify(replyObj));
+	gamelobby.emit('nickname mapping', JSON.stringify(id2name));
 
 
 }
