@@ -115,17 +115,14 @@ gamelobby.on('connection', function (socket) {
 
   })
 
-  socket.on('quit game', function(){
-
-  	for (var roomId in roomList)
-  		if ((socket.playerid in roomList[roomId].playerList)
-  			&& (socket.playerid in roomList[roomId].readyPlayerList)){
-
-  			delete roomList[roomId].readyPlayerList[socket.playerid];
-  			break;
-  		}
-
-  });
+  // socket.on('cancel ready', function(){
+  // 	for (var roomId in roomList)
+  // 		if ((socket.playerid in roomList[roomId].playerList)
+  // 			&& (socket.playerid in roomList[roomId].readyPlayerList)){
+  // 			delete roomList[roomId].readyPlayerList[socket.playerid];
+  // 			break;
+  // 		}
+  // });
 
 
   socket.on('disconnect', function () {
