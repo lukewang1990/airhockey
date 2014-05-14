@@ -73,7 +73,7 @@ $(document).ready(function(event) {
 		console.log('invalid number of player parameter encountered');
 	}
 
-	setGame(playerID, roomID ,num, shape, localStorage.getItem('readyList'));
+	// setGame(playerID, roomID ,num, shape, localStorage.getItem('readyList'));
 
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
@@ -140,6 +140,23 @@ $(document).ready(function(event) {
 		if (localStorage.getItem('roomId') == roomId){
 			localStorage.setItem('readyList', readyList);
 			localStorage.setItem('mapping', mapping);
+			
+			// check if all players are ready
+			var readyListObj = JSON.parse(readyList);
+			var keys = Object.keys(readyListObj);
+			var sum = 0;
+			for (var i = 0; i < keys.length; i++) {
+				sum += readyListObj[keys[i]];
+				if (playerID == keys[i]) {
+					index = i;
+				}
+			}
+			if (keys.length == num && sum == num) {
+				localStorage.setItem('idx2id', keys);
+				localStorage.setItem('selfIndex', index);
+				/// TODO: Tell the game server
+			}
+			
 			updatePlayerList();
 		}
 	});
