@@ -7,7 +7,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html ng-app="airhockeyApp">
 <head>
 	<meta charset="UTF-8">
 	<title>Airhockey</title>
@@ -29,9 +29,15 @@
 	    </div>
 	    <!-- Collection of nav links, forms, and other content for toggling -->
 	    <div id="navbarCollapse" class="collapse navbar-collapse">
-	        <ul class="nav navbar-nav">
-	            <li ><a href="index.html">Home</a></li>
-	            <li ><a href="airhockey.php">Game</a></li>
+	        <ul class="nav navbar-nav" ng-controller="NavbarCtrl">
+	            <li ng-class="{'active':getClass('/home')}"><a href="#/home">Home</a></li>
+	            <li class="dropdown">
+	                <a data-toggle="dropdown" class="dropdown-toggle" href="">Game<b class="caret"></b></a>
+	                <ul role="menu" class="dropdown-menu">
+	                    <li><a href="#/matching">Matching</a></li>
+	                    <li><a href="#/instruction">Instruction</a></li>
+	                </ul>
+	            </li>
 	        </ul>
 	        <ul class="nav navbar-nav navbar-right">
 				<li><a href="logout_handle.php">Log out&nbsp;&nbsp;</a></li>
@@ -39,43 +45,18 @@
 	    </div>
 	</nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-3" id="control-panel">
-                big pic of mole
-            </div>
-            <div class="col-xs-9" id="list-container">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">Bar Shape</a></li>
-                            <li><a href="#">Round Shape</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">2 Players</a></li>
-                            <li><a href="#">4 Players</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
-                </div>
-                
-            </div>
+	<div ng-view></div>
 
-        </div>
-    </div>
-
+	<script src="bower_components/angular/angular.js"></script>
+	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-resource/angular-resource.js"></script>
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
 </body>
