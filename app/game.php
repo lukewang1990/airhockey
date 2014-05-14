@@ -30,8 +30,8 @@
 	    <!-- Collection of nav links, forms, and other content for toggling -->
 	    <div id="navbarCollapse" class="collapse navbar-collapse">
 	        <ul class="nav navbar-nav">
-	            <li ><a href="index.html">Home</a></li>
-	            <li ><a href="airhockey.php">Game</a></li>
+	            <li><a href="index.html">Home</a></li>
+				<li class="active"><a href="airhockey.php">Game</a></li>
 	        </ul>
 	        <ul class="nav navbar-nav navbar-right">
 				<li><a href="logout_handle.php">Log out&nbsp;&nbsp;</a></li>
@@ -39,10 +39,20 @@
 	    </div>
 	</nav>
 
-    <div class="container">
+	<div class="container">
         <div class="row">
             <div class="col-xs-3" id="control-panel">
-                big pic of mole
+                <button type="button" class="btn btn-primary btn-block btn-lg">
+					<span class="glyphicon glyphicon-play"></span> Start
+				</button>
+                <div class="row">
+                	<div ></div>
+                </div>
+                <div class="row">
+                	
+                </div>
+                <div class="row"></div>
+                <div class="row"></div>
             </div>
             <div class="col-xs-9" id="list-container">
                 <div class="row">
@@ -59,14 +69,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="row">
-                    <ul class="list-group">
-                        <li class="list-group-item">Cras justo odio</li>
-                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                        <li class="list-group-item">Morbi leo risus</li>
-                        <li class="list-group-item">Porta ac consectetur ac</li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                    </ul>
+                <div class="container">
+                    BlaBlaBla
                 </div>
                 
             </div>
@@ -78,9 +82,16 @@
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
+	<script type="text/javascript">
+
+
+		$(document).ready(function(event) {
+			
+
+		});
+	</script>
 </body>
 </html>
-
 <?php
 		} else {
 			// redirect to login page
