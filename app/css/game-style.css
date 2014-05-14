@@ -1,23 +1,22 @@
-#container {
+#game_container {
 	position: absolute;
 	width: 420px;
 	height: 560px;
 	left: 10px;
 	top: 20px;
-	border: 2px solid red;
 	background-color: white;
 }
 
 .wall {
 	position: absolute;
-	background-color: red;
+	background-color: brown;
 }
 
 .hocky {
 	position: absolute;
 	z-index: 5;
     display: block;
-    background: rgba(0,0,0,1) -webkit-radial-gradient(center 75%, ellipse contain, #ffffff, rgba(255,255,255,0) 60%);
+    background: rgba(0,0,0,0.5) -webkit-radial-gradient(center 75%, ellipse contain, #ffffff, rgba(255,255,255,0) 60%);
 }
 
 .pad {

@@ -175,10 +175,20 @@ function updateControl()
 	game.socket.emit('control', control_package);
 }
 
-function setGame(player_id, room_id, player_num, pad_shape) {
-	game.init(player_id, room_id, player_num, pad_shape)
+function setGame(playerID, room_id, player_num, pad_shape, ready_list) {
+	var player_id = 0;
+	var keys = Object.keys(JSON.parse(ready_list));
+	for(var key in keys) {
+		if (key == playerID) {
+			break;
+		}
+		player_id ++;
+	}
+
+
+	game.init(player_id, parseInt(room_id), parseInt(player_num), pad_shape);
 	game_container = $("#game_container");
-	console.log(game_container);
+	console.log(ready_list);
 	game.socket = io.connect('http://localhost:8081/game');
 
 	var room_info = {};
@@ -213,6 +223,16 @@ function setGame(player_id, room_id, player_num, pad_shape) {
 					game.my_pad = div;
 					events.destination.x = pack.x;
 					events.destination.y = pack.y;
+				}
+
+				if(pack.css_class == "pad") {
+					var num = parseInt(pack.id.substring(3, 4));
+					var color = (num == 0)?("#FF0000"):
+								(num == 1)?("#428bca"):
+								(num == 2)?("#FFFF00"):
+								(num == 3)?("#5cb85c"):("#000000");
+					div.css({"background": color});
+
 				}
 
 				// if(pack.css_class == "wall") {
@@ -250,8 +270,8 @@ function setGame(player_id, room_id, player_num, pad_shape) {
 	});
 
 	game.socket.on('goal', function (data) {
-		var text1 = data[0] + " goal!";
-		var text2 = data[1] + " win!";
+		var text1 = (data[0] + 1) + " goal!";
+		var text2 = (data[1] + 1) + " win!";
 		if (game.player_num == 2) {
 			text1 = "Player " + text1;
 			text2 = "Player " + text2;
@@ -280,6 +300,17 @@ function setGame(player_id, room_id, player_num, pad_shape) {
 	})
 }
 
-function onReadyClick() {
-	game.socket.emit('ready');
+function game_ready_clicked() {
+	var ready_list = JSON.parse(localStorage.getItem('readyList'));
+	var keys = Object.keys(ready_list);
+	var count = 0;
+	for (var key in keys) {
+		if(ready_list[key] == 1) {
+			count ++;
+		}
+	}
+
+	if(count >= game.player_num) {
+		game.socket.emit('ready');
+	}
 }

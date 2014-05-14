@@ -12,7 +12,7 @@ $(document).ready(function(event) {
 	$('#game-num').html(num);
 	$('#nickname').html(name);
 
-	setGame(playerID, roomID ,num, shape);
+	setGame(playerID, roomID ,num, shape, localStorage.getItem('readyList'));
 
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
@@ -82,12 +82,12 @@ $(document).ready(function(event) {
 	});
 	
 	// prepare data to send to the game server
-	data = new Object();
-	data.readyList = localStorage(getItem('readyList'));
-	data.num = num;
-	data.score = 5;
-	data.shape = shape;
-	gameConn.emit('enter config', data);
+	// data = new Object();
+	// data.readyList = localStorage(getItem('readyList'));
+	// data.num = num;
+	// data.score = 5;
+	// data.shape = shape;
+	// gameConn.emit('enter config', data);
 
 	scoreConn.on('score-update', function () {
 		console.log(data);
@@ -128,6 +128,7 @@ $(document).ready(function(event) {
 		event.stopPropagation();
 		// send data
 		lobbyConn.emit('game ready', playerID);
+		game_ready_clicked();
 		// gameConn.emit('game ready', playerID);
 	});
 
