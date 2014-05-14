@@ -15,7 +15,7 @@ $(document).ready(function(event) {
         reqObj.password = $('#password').val();    // plaintext password in transmission ///TBC
         reqObj.persistent = $('#persistent').is(':checked') ? 'true' : 'false';
         var reqStr = JSON.stringify(reqObj);
-        console.log(reqStr);
+        // console.log(reqStr);
 
         var $form = $(this);
         var $inputs = $form.find('input, select, button, textarea');    // select and cache all the fields
@@ -47,14 +47,14 @@ $(document).ready(function(event) {
                 }
 
             } else {
-                console.error(res.error);
+                alert(res.error);
             }
         });
 
         // callback handler that will be called on failure
         request.fail(function (jqXHR, textStatus, errorThrown) {
             // log the error to the console
-            console.error(
+            alert(
                 "The following error occured: "+
                 textStatus, errorThrown
             );
