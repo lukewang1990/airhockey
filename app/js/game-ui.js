@@ -79,6 +79,13 @@ $(document).ready(function(event) {
 		}
 	});
 	
+	// prepare data to send to the game server
+	data = new Object();
+	data.readyList = localStorage(getItem('readyList'));
+	data.num = num;
+	data.score = 5;
+	data.shape = shape;
+	gameConn.emit('enter config', data);
 
 	scoreConn.on('score-update', function () {
 		console.log(data);
@@ -117,16 +124,9 @@ $(document).ready(function(event) {
 	$('#ready-button').click(function(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		// prepare data to send
-		data = new Object();
-		data.index = index;
-		data.num = num;
-		data.name = name;
-		data.score = 5;
-		data.shape = shape;
 		// send data
 		lobbyConn.emit('game ready', playerID);
-		/// TODO: emit to game route
+		// gameConn.emit('game ready', playerID);
 	});
 
 	$('#return-button').click(function(event) {
