@@ -42,36 +42,45 @@
 	<div class="container">
         <div class="row">
             <div class="col-xs-3" id="control-panel">
-                <button type="button" class="btn btn-primary btn-block btn-lg">
-					<span class="glyphicon glyphicon-play"></span> Start
-				</button>
-                <div class="row">
-                	<div ></div>
+                <div class="row" style="margin: 5px 0;">
+                	<span class="col-xs-6 label label-info">Welcome</span>
+                	<span class="col-xs-6 label label-primary" id="nickname">Luke</span>
+                </div>
+                <div class="row" style="margin: 5px 0;">
+                   	<span class="col-xs-6 label label-info">Game type</span>
+                	<span class="col-xs-6 label label-success" id="game-shape">bar</span>
+                </div>
+                <div class="row" style="margin: 5px 0;">
+                	<span class="col-xs-6 label label-info">Number of players</span>
+                	<span class="col-xs-6 label label-warning" id="game-num">2</span>
                 </div>
                 <div class="row">
-                	
+	            	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin: 20px 0;">
+						<span class="glyphicon glyphicon-play"></span> Ready
+					</button>
+                </div>
+                <div class="row">
+                <ul class="list-group">
+                	<li class="list-group-item" id="self-score"><span class="badge">1</span>You</li>
+                	<li class="list-group-item" id="opponent-score"><span class="badge">2</span>Opponent</li>
+                </ul>
+                </div>
+                <div class="row">
+                	<ul class="list-group" id="player-list">
+                		<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
+						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
+						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
+						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
+                	</ul>
                 </div>
                 <div class="row"></div>
                 <div class="row"></div>
             </div>
-            <div class="col-xs-9" id="list-container">
-                <div class="row">
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">Bar Shape</a></li>
-                            <li><a href="#">Round Shape</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#">2 Players</a></li>
-                            <li><a href="#">4 Players</a></li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="col-xs-9" id="board-container">
                 <div class="container">
-                    BlaBlaBla
+					<div style="width:800px;height:800px;background:black;">HAHA</div>
                 </div>
+                
                 
             </div>
 
@@ -82,14 +91,7 @@
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
-	<script type="text/javascript">
-
-
-		$(document).ready(function(event) {
-			
-
-		});
-	</script>
+	<script src="js/game-ui.js"></script>
 </body>
 </html>
 <?php
