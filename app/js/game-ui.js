@@ -141,8 +141,19 @@ $(document).ready(function(event) {
 
 	scoreConn.on('score-update', function () {
 		console.log(data);
+		
+		// update view
 		$('#self-score').children('span').html(data[selfTeam]);
 		$('#opponent-score').children('span').html(data[1 - selfTeam]);
+
+		// check if game ends
+		if (data[0] == 5 && selfTeam == 0 || data[1] == 5 && selfTeam == 1) {
+			lobbyConn.emit('game end', '');
+			$('#opponent-score').addClass('list-group-item-info');
+		} else if (data[0] == 5 && selfTeam == 1 || data[1] == 5 && selfTeam == 0) {
+			lobbyConn.emit('game end', '');
+			$('#opponent-score').addClass('list-group-item-info');
+		}
 	});
 
 	// add event listeners
