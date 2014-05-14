@@ -65,7 +65,7 @@ socket.on('playerid register ok', function (){
 	});
 
 	$('#nickname').html(nickname);
-
+	
 	socket.on('BarShape 2PlayerMode', function (data){
 		if ($("#BarShape").hasClass("active") && $("#2PlayerMode").hasClass("active"))
 			updateRoomList(data);
