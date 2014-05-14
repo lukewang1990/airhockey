@@ -5,6 +5,7 @@ $obj = json_decode($str, true);
 $email = $obj['email'];
 $nickname = $obj['name'];
 $password = $obj['password'];
+$playerID;
 
 $resObj = array();
 if (! empty($email) && ! empty($nickname) && ! empty($password)) {
@@ -20,6 +21,10 @@ if (! empty($email) && ! empty($nickname) && ! empty($password)) {
 		} else {
 			$stmt = $conn->prepare("INSERT INTO users (email, password, nickname) VALUES (\"{$email}\", \"{$password}\", \"{$nickname}\")");
 	    	$stmt->execute();
+	    	$stmt = $conn->prepare("SELECT uid FROM users WHERE email=\"$email\"");
+	    	$stmt->execute();
+	    	$rows = $stmt->fetchAll();
+	    	$playerID = $rows[0][0];
 		}
 	} catch (PDOException $e) {
 		$resObj['error'] = 'ERROR: '.$e->getMessage();
@@ -39,6 +44,8 @@ if (empty($resObj['error'])) { 	// registration successful
 		$resObj['id_cookie'] = $id_cookie;
 		$resObj['session_cookie'] = $session_cookie;
 		$resObj['persistent'] = 'true';
+		$resObj['nickname'] = $nickname;
+		$resObj['playerID'] = $playerID;
 	} else {
 		// session key generation fail
 		$resObj['success'] = 'false';

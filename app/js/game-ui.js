@@ -2,16 +2,11 @@ var selfTeam,
 	index; 	// index within the game room
 
 $(document).ready(function(event) {
-	/////// TEST //////////
-	localStorage.setItem('shape', 'round');
-	localStorage.setItem('num_player', 4);
-	localStorage.setItem('nickname', 'Lance');
-	///////////////// TEST END //////////////////
-	
 	// read and set the game info fields
 	var shape = localStorage.getItem('shape');
-	var num = localStorage.getItem('num_player');
+	var num = localStorage.getItem('numPlayer');
 	var name = localStorage.getItem('nickname');
+	var playerID = localStorage.getItem('playerID');
 	$('#game-shape').html(shape);
 	$('#game-num').html(num);
 	$('#nickname').html(name);
@@ -72,7 +67,8 @@ $(document).ready(function(event) {
 
 	// initialize socket.io connections
 	var scoreConn = io.connect('http://localhost:8080/score'),
-		playerConn = io.connect('http://localhost:8080/player');
+		playerConn = io.connect('http://localhost:8080/player'),
+		lobbyConn = io.connect('http://localhost:8080/gamelobby');
   
 	scoreConn.on('score-update', function () {
 		console.log(data);
@@ -108,7 +104,7 @@ $(document).ready(function(event) {
 	});
 
 	// add event listeners
-	$(#ready-button).click(function(event) {
+	$('#ready-button').click(function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		// prepare data to send
@@ -119,7 +115,14 @@ $(document).ready(function(event) {
 		data.score = 5;
 		data.shape = shape;
 		// send data
-		socket.emit('ready', data);
+		lobbyConn.emit('game ready', playerID);
+		/// TODO: emit to game route
+	});
+
+	$('#return-button').click(function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		window.location = 'airhockey.php';
 	});
 
 });

@@ -12,6 +12,7 @@
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.x",
     "bootstrap": "~3.1.1",
+    "socket.io-client": "0.9.x",
     "html5-boilerplate": "~4.3.0"
   }
 }

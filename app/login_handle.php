@@ -5,6 +5,8 @@ $obj = json_decode($str, true);
 $email = $obj['email'];
 $password = $obj['password'];
 $persistent = $obj['persistent'];
+$nickname;
+$playerID;
 
 $resObj = array();
 if (! empty($email) && ! empty($password) && ! empty($persistent)) {
@@ -20,6 +22,8 @@ if (! empty($email) && ! empty($password) && ! empty($persistent)) {
 			$resObj['error'] = 'Email or password incorrect';
 		} else {
 			// matching record founded
+			$nickname = $rows[0][3];
+			$playerID = $rows[0][0];
 		}
 	} catch (PDOException $e) {
 		$resObj['error'] = 'ERROR: '.$e->getMessage();
@@ -46,6 +50,8 @@ if (empty($resObj['error'])) { 	// login successful
 		$resObj['id_cookie'] = $id_cookie;
 		$resObj['session_cookie'] = $session_cookie;
 		$resObj['persistent'] = $persistent;
+		$resObj['nickname'] = $nickname;
+		$resObj['playerID'] = $playerID;
 	} else {
 		// session key generation fail
 		$resObj['success'] = 'false';

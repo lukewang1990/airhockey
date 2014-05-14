@@ -55,7 +55,7 @@
                 	<span class="col-xs-6 label label-warning" id="game-num">2</span>
                 </div>
                 <div class="row">
-	            	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin: 20px 0;">
+	            	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin: 20px 0;" id="ready-button">
 						<span class="glyphicon glyphicon-play"></span> Ready
 					</button>
                 </div>
@@ -73,12 +73,15 @@
 						<li class="list-group-item"><span class="badge">Not ready</span><span class="player-name">Blablabla</span></li>
                 	</ul>
                 </div>
-                <div class="row"></div>
-                <div class="row"></div>
+                <div class="row">
+                	<button type="button" class="btn btn-primary btn-block btn-lg" style="margin: 20px 0;" id="return-button">
+						<span class="glyphicon glyphicon-home"></span> Exit to Lobby
+					</button>
+                </div>
             </div>
             <div class="col-xs-9" id="board-container">
                 <div class="container">
-					<div style="width:800px;height:800px;background:black;">HAHA</div>
+					<div style="width:400px;height:400px;background:black;"></div>
                 </div>
                 
                 
@@ -89,6 +92,7 @@
 
 	<script src="bower_components/jquery/dist/jquery.js"></script>
 	<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="bower_components/socket.io-client/dist/socket.io.js"></script>
 	<script src="js/jquery.cookie.js"></script>
 	<script src="js/helper.js"></script>
 	<script src="js/game-ui.js"></script>
