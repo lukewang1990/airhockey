@@ -40,7 +40,7 @@ function Game() {
 		game.room_id = room_id;
 		game.player_num = player_num;
 		game.pad_shape = (pad_shape == "BarShape")?"rec":"circle";
-		game.team = Math.floor((game.me + 1)/game.player_num);
+		game.team = Math.floor((game.me + game.player_num/2)/game.player_num);
 	}
 };
 
@@ -246,13 +246,18 @@ function setGame(room_id, player_num, pad_shape) {
 	});
 
 	game.socket.on('start', function (data) {
-		console.log("start time: " + data);
 		var cur_t = new Date().getTime();
-		setTimeout(function() {
+		console.log("start time: " + cur_t);
+		var difference = data - cur_t;
+		if(difference > 0 && difference < 1000) {
+			setTimeout(function() {
+				game.prepareGame();
+			}, difference);
+		}
+		else {
 			game.prepareGame();
-		}, data - cur_t);
+		}
 	});
-
 	game.socket.on('goal', function (data) {
 		console.log(data);
 		updateScoreboard([data[2], data[3]]);
@@ -289,13 +294,18 @@ function setGame(room_id, player_num, pad_shape) {
 
 function game_all_ready(player_id) {
 	game.me = player_id;
-	game.team = Math.floor((game.me + 1)/game.player_num);
+	game.team = Math.floor((game.me + game.player_num/2)/game.player_num);
 
 	var div = divs["pad" + game.me];
 	console.log(div);
 	game.my_pad = div;
 	events.destination.x = div._userModel.x;
 	events.destination.y = div._userModel.y;
-	
-	game.socket.emit('ready', game.me);
+
+	var data = {};
+	data.room_id = game.room_id;
+	data.player_id = game.me;
+	console.log("ready:");
+	console.log(data);	
+	game.socket.emit('ready', data);
 }

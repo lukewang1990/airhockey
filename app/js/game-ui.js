@@ -21,6 +21,12 @@ function updatePlayerList() {
 		p++;
 	}
 
+	for (; p < num; p++) {
+		var el = $('#player-list li:nth-child(' + (p + 1) +')');
+		el.children('.player-name').html('&nbsp;');
+		el.children('.badge').html('Empty');
+	}
+
 }
 
 // data is two element array
@@ -45,7 +51,7 @@ function updateScoreboard(data) {
 $(document).ready(function(event) {
 	// read and set the game info fields
 	var shape = localStorage.getItem('shape');
-	var num = localStorage.getItem('numPlayer');
+	num = localStorage.getItem('numPlayer');
 	var name = localStorage.getItem('nickname');
 	var playerID = localStorage.getItem('playerID');
 	var roomID = localStorage.getItem('roomId');

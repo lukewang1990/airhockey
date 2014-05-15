@@ -67,10 +67,10 @@
                 </div>
                 <div class="row">
                 	<ul class="list-group" id="player-list">
-                		<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
-						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
-						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
-						<li class="list-group-item"><span class="badge">Empty</span><span class="player-name">&nbsp;</span></li>
+                		<li class="list-group-item"><span class="badge">Empty</span><span class="label label-danger player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="label label-info player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="label label-warning player-name">&nbsp;</span></li>
+						<li class="list-group-item"><span class="badge">Empty</span><span class="label label-success player-name">&nbsp;</span></li>
                 	</ul>
                 </div>
                 <div class="row">
