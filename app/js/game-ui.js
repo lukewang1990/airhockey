@@ -1,6 +1,7 @@
 var selfTeam, 
 	index,
 	playerID,
+	lobbyConn,
 	num; 	// index within the game room
 
 function updatePlayerList() {
@@ -12,15 +13,6 @@ function updatePlayerList() {
 		var el = $('#player-list li:nth-child(' + (p + 1) +')');
 		el.children('.player-name').html(mapping[k]);
 		
-		if (p == num && k == playerID) {
-			if (p < num / 2) {
-				selfTeam = 0;
-			} else {
-				selfTeam = 1;
-			}
-			console.log('selfTeam is ' + selfTeam);
-		}
-
 		if (readyObj[k] == '0') {
 			el.children('.badge').html('Not ready');
 		} else if (readyObj[k] == '1') {
@@ -34,6 +26,9 @@ function updatePlayerList() {
 // data is two element array
 function updateScoreboard(data) {
 	// update view
+	console.log(data);
+	console.log(data[selfTeam]);
+	console.log(selfTeam);
 	$('#self-score').children('span').html(data[selfTeam]);
 	$('#opponent-score').children('span').html(data[1 - selfTeam]);
 
@@ -73,7 +68,7 @@ $(document).ready(function(event) {
 		console.log('invalid number of player parameter encountered');
 	}
 
-	// setGame(playerID, roomID ,num, shape, localStorage.getItem('readyList'));
+	setGame(roomID ,num, shape);
 
 // ///////////////// TEST /////////////////
 // 	var data = new Array();
@@ -130,8 +125,7 @@ $(document).ready(function(event) {
 // ///////////////// TEST END //////////////////
 
 	// initialize socket.io connections
-	var scoreConn = io.connect('http://localhost:8080/score'),
-		lobbyConn = io.connect('http://localhost:8080/gamelobby');
+	lobbyConn = io.connect('http://localhost:8080/gamelobby');
 
 	// notify the game controller that the player is in the game
 	lobbyConn.emit('playerid register', playerID, roomID, name);
@@ -152,9 +146,16 @@ $(document).ready(function(event) {
 				}
 			}
 			if (keys.length == num && sum == num) {
+				if (index < num / 2) {
+					selfTeam = 0;
+				} else {
+					selfTeam = 1;
+				}
+				console.log('selfTeam is ' + selfTeam);
 				localStorage.setItem('idx2id', keys);
 				localStorage.setItem('selfIndex', index);
 				/// TODO: Tell the game server
+				game_all_ready(index);
 			}
 			
 			updatePlayerList();
@@ -169,7 +170,7 @@ $(document).ready(function(event) {
 		$(this).prop('disabled', true);
 		// send data
 		lobbyConn.emit('game ready', playerID);
-		game_ready_clicked();
+		//game_ready_clicked();
 		// gameConn.emit('game ready', playerID);
 	});
 

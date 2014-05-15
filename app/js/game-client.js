@@ -175,20 +175,10 @@ function updateControl()
 	game.socket.emit('control', control_package);
 }
 
-function setGame(playerID, room_id, player_num, pad_shape, ready_list) {
-	var player_id = 0;
-	var keys = Object.keys(JSON.parse(ready_list));
-	for(var key in keys) {
-		if (key == playerID) {
-			break;
-		}
-		player_id ++;
-	}
+function setGame(room_id, player_num, pad_shape) {
 
-
-	game.init(player_id, parseInt(room_id), parseInt(player_num), pad_shape);
+	game.init(0, parseInt(room_id), parseInt(player_num), pad_shape);
 	game_container = $("#game_container");
-	console.log(ready_list);
 	game.socket = io.connect('http://localhost:8081/game');
 
 	var room_info = {};
@@ -218,12 +208,6 @@ function setGame(playerID, room_id, player_num, pad_shape, ready_list) {
 
 				div = divs[pack.id] = $('#' + pack.id);
 				div._userModel = {x: pack.x, y: pack.y, r: pack.r, width: pack.width, height: pack.height};
-
-				if(pack.id == "pad" + game.me) {
-					game.my_pad = div;
-					events.destination.x = pack.x;
-					events.destination.y = pack.y;
-				}
 
 				if(pack.css_class == "pad") {
 					var num = parseInt(pack.id.substring(3, 4));
@@ -270,6 +254,9 @@ function setGame(playerID, room_id, player_num, pad_shape, ready_list) {
 	});
 
 	game.socket.on('goal', function (data) {
+		console.log(data);
+		updateScoreboard([data[2], data[3]]);
+
 		var text1 = (data[0] + 1) + " goal!";
 		var text2 = (data[1] + 1) + " win!";
 		if (game.player_num == 2) {
@@ -300,17 +287,15 @@ function setGame(playerID, room_id, player_num, pad_shape, ready_list) {
 	})
 }
 
-function game_ready_clicked() {
-	var ready_list = JSON.parse(localStorage.getItem('readyList'));
-	var keys = Object.keys(ready_list);
-	var count = 0;
-	for (var key in keys) {
-		if(ready_list[key] == 1) {
-			count ++;
-		}
-	}
+function game_all_ready(player_id) {
+	game.me = player_id;
+	game.team = Math.floor((game.me + 1)/game.player_num);
 
-	if(count >= game.player_num) {
-		game.socket.emit('ready');
-	}
+	var div = divs["pad" + game.me];
+	console.log(div);
+	game.my_pad = div;
+	events.destination.x = div._userModel.x;
+	events.destination.y = div._userModel.y;
+	
+	game.socket.emit('ready', game.me);
 }
