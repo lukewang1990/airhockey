@@ -179,7 +179,7 @@ function setGame(room_id, player_num, pad_shape) {
 
 	game.init(0, parseInt(room_id), parseInt(player_num), pad_shape);
 	game_container = $("#game_container");
-	game.socket = io.connect('http://localhost:8081/game');
+	game.socket = io.connect('http://54.186.241.95:8081/game');
 
 	var room_info = {};
 	room_info.room_id = game.room_id;

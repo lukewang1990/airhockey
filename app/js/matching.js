@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost:8080/gamelobby');
+var socket = io.connect('http://54.186.241.95:8080/gamelobby');
 
 var requestMode = new Object();
 requestMode.player = 2;
