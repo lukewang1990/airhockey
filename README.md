@@ -9,6 +9,7 @@
 ## Deployment
 
 > * Play it within LAN (or anywhere that the round-trip time between the client and the server is not significant) for best game experience.
+> * Use **npm install** to get dependencies installed properly
 > * Have Apache2 and MySQL properly installed. *Symbolic link* / *Copy* the repository to **htdoc/** or **/var/www/** (the location as configured by httpd.conf)
 > * Modify *php_module/db_module.php* so that correct db_user and db_password are available
 > * Run *game_server.js* and *serverMatching.js* under *app/server/* by **node game_server.js** and **node serverMatching.js**
