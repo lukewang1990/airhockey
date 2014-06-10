@@ -55,6 +55,7 @@ $(document).ready(function(event) {
 	var name = localStorage.getItem('nickname');
 	var playerID = localStorage.getItem('playerID');
 	var roomID = localStorage.getItem('roomId');
+	var headshot = localStorage.getItem('headshot');
 	$('#game-shape').html(shape);
 	$('#game-num').html(num);
 	$('#nickname').html(name);
@@ -132,7 +133,8 @@ $(document).ready(function(event) {
 
 	// initialize socket.io connections
 	// lobbyConn = io.connect('http://54.186.241.95:8080/gamelobby');
-	lobbyConn = io.connect('http://192.168.215.53:8080/gamelobby');
+	lobbyConn = io.connect('http://192.168.112.159:8080/gamelobby');
+	// lobbyConn = io.connect('http://localhost:8080/gamelobby');
 
 	// notify the game controller that the player is in the game
 	lobbyConn.emit('playerid register', playerID, roomID, name);

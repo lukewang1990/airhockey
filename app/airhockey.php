@@ -43,7 +43,7 @@
             <div class="col-xs-3" id="control-panel">
                 <div class="row">
 	                <a class="thumbnail">
-	         			<img src="img/tywong.jpg">
+	         			<img src="" id="headshot">
 	     			</a>
 	     		</div>
 	     		<div class="row">
@@ -51,34 +51,26 @@
 	                	<span class="col-xs-6 label label-info">Nickname</span>
 	                	<span class="col-xs-6 label label-primary" id="nickname">&nbsp;</span>
 	                </div>
+	                <div class="row" style="margin: 5px 0;">
+	                	<span class="label label-info">Game Type</span>
+                        <ul class="nav nav-pills" style="margin: 5px 0;">
+                            <li class="active" id="BarShape"><a>Bar Shape</a></li>
+                            <li id="RoundShape"><a>Round Shape</a></li>
+                        </ul>
+	                </div>
+	                <div class="row" style="margin: 5px 0;">
+	                	<span class="label label-info">Num Of Players</span>
+                	    <ul class="nav nav-pills" style="margin: 5px 0;">
+                            <li class="active" id="2PlayerMode"><a>2 Players</a></li>
+                            <li id="4PlayerMode"><a>4 Players</a></li>
+                        </ul>
+	                    
+	                </div>
 	     		</div>
             </div>
             <div class="col-xs-9" id="list-container">
 
-                <div class="row">
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active" id="BarShape"><a>Bar Shape</a></li>
-                            <li id="RoundShape"><a>Round Shape</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xs-6">
-                        <ul class="nav nav-tabs nav-justified">
-                            <li class="active" id="2PlayerMode"><a>2 Players</a></li>
-                            <li id="4PlayerMode"><a>4 Players</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <ul class="list-group" id="room-list">
-                    </ul>
-                   
-                </div>
-
-                <div class="row">
-
+                <div class="row" style="margin: 5px 0;">
                 	 <div class="btn-group btn-group-justified">
 						  <div class="btn-group">
 						    <button type="button" class="btn btn-success" id="auto-join">Auto Join</button>
@@ -89,7 +81,12 @@
 						  </div>
 					</div>
 				</div>
-                
+
+                <div class="row" style="margin: 5px 0;">
+                    <ul class="list-group" id="room-list">
+                    </ul> 
+                </div>
+
             </div>
 
         </div>

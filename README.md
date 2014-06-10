@@ -6,32 +6,32 @@
 
 ---
 
-## Resource
+## Deployment
 
-### 1. socket.io
+> * Play it within LAN (or anywhere that the round-trip time between the client and the server is not significant) for best game experience.
+> * Have Apache2 and MySQL properly installed. *Symbolic link* / *Copy* the repository to **htdoc/** or **/var/www/** (the location as configured by httpd.conf)
+> * Modify *php_module/db_module.php* so that correct db_user and db_password are available
+> * Run *game_server.js* and *serverMatching.js* under *app/server/* by **node game_server.js** and **node serverMatching.js**
+> * Search for **io.connect(** in *matching.js*, *game-ui.js* and *game-client.js* and update the domain names to be the **server IP** (where *game_server.js* and *serverMatching.js* are run on)
+> * Use **app/admin/reinit.php** to reinitialize the system (database etc.)
 
-> * https://github.com/LearnBoost/socket.io
-> * http://socket.io/#how-to-use
+## Usage
 
-### 2. Box2D
+> * Register with required information / Login if already registered
+> * Choose game type and number of players in the left-bottom part of game lobby
+> * The right-hand side would list the available game rooms if they are there
+> * Click **auto join** to join a game
+> * Click **new game** to create a new game room with the toggled game type
+> * Click **Ready** when inside the game room
+> * When everyone in the game room have clicked *Ready*, the game starts
+> * The game ends once either side scores five pts!
+> * Exit to lobby once the game ends
 
-> * https://github.com/kripken/box2d.js
+## Libraries & Frameworks used
 
-### 3. AngularJS vs JQuery
-
-> * http://stackoverflow.com/questions/13151725/how-is-angular-js-different-from-jquery
-> * http://stackoverflow.com/questions/18414012/why-use-angularjs-instead-of-jquery
-
-### 4. HTML5 Canvas
-
-> * https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Canvas_tutorial
-> * http://www.html5canvastutorials.com/advanced/html5-canvas-mouse-coordinates/
-
----
-
-## Milestones
-
-> * login system & game lobby **10pts**
-> * two-player game **10pts**
-> * round-shaped bat or bar shape bar **5pts**
-> * multi-player(3 - 6) (with modified game board) **5pts**
+> * jquery/jquery
+> * twbs/bootstrap
+> * kripken/box2d.js
+> * silviomoreto/bootstrap-select
+> * carhartl/jquery-cookie
+> * angular/angular-seed

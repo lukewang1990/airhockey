@@ -1,8 +1,11 @@
 function showTerm() {
-    alert('Term of usage: You agree with the fact that CSCI4140 is AWESOME!');
+    alert('Term of usage: You are confident enough to be the best airhockey guru!');
 }
 
 $(document).ready(function(event) {
+    // for select element bootstrap support plugin
+    $('.selectpicker').selectpicker();
+
     var request;    // variable to hold request
     $('#reg-form').submit(function(event) {
         // prevent default posting of form
@@ -27,6 +30,7 @@ $(document).ready(function(event) {
         reqObj.email = $('#email').val();
         reqObj.name = $('#name').val();
         reqObj.password = $('#password').val();    // plaintext password in transmission ///TBC
+        reqObj.headshot = $('#headshot').val();
         var reqStr = JSON.stringify(reqObj);
         
         var $form = $(this);
@@ -45,6 +49,7 @@ $(document).ready(function(event) {
         // callback handler that will be called on success
         request.done(function (data, textStatus, jqXHR) {
             // console.log("response: " + data);
+            console.log(data);
             var res = JSON.parse(data);
             if (res.success == 'true') {
                 // set cookies accordingly
@@ -53,6 +58,7 @@ $(document).ready(function(event) {
                 // save useful info in localStorage
                 localStorage.setItem('nickname', res.nickname);
                 localStorage.setItem('playerID', res.playerID);
+                localStorage.setItem('headshot', res.headshot);
 
                 if (res.redirect == 'true') {
                     window.location = res.redirectURL;
@@ -80,4 +86,12 @@ $(document).ready(function(event) {
         });
 
     });
+
+    $('select').on('change', function(e) {
+      // alert( this.value ); // or $(this).val()
+      e.preventDefault();
+      e.stopPropagation();
+      $('#headshot_img').attr('src','img/headshot/' + this.value + '.jpg');
+    });
+
 });

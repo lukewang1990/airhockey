@@ -41,6 +41,7 @@ $(document).ready(function(event) {
                 // save useful info in localStorage
                 localStorage.setItem('nickname', res.nickname);
                 localStorage.setItem('playerID', res.playerID);
+                localStorage.setItem('headshot', res.headshot);
 
                 if (res.redirect == 'true') {
                     window.location = res.redirectURL;

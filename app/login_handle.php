@@ -7,6 +7,7 @@ $password = $obj['password'];
 $persistent = $obj['persistent'];
 $nickname;
 $playerID;
+$headshot;
 
 $resObj = array();
 if (! empty($email) && ! empty($password) && ! empty($persistent)) {
@@ -24,6 +25,7 @@ if (! empty($email) && ! empty($password) && ! empty($persistent)) {
 			// matching record founded
 			$nickname = $rows[0][3];
 			$playerID = $rows[0][0];
+			$headshot = $rows[0][4];
 		}
 	} catch (PDOException $e) {
 		$resObj['error'] = 'ERROR: '.$e->getMessage();
@@ -52,6 +54,7 @@ if (empty($resObj['error'])) { 	// login successful
 		$resObj['persistent'] = $persistent;
 		$resObj['nickname'] = $nickname;
 		$resObj['playerID'] = $playerID;
+		$resObj['headshot'] = $headshot;
 	} else {
 		// session key generation fail
 		$resObj['success'] = 'false';

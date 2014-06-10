@@ -5,6 +5,7 @@ $obj = json_decode($str, true);
 $email = $obj['email'];
 $nickname = $obj['name'];
 $password = $obj['password'];
+$headshot = $obj['headshot'];
 $playerID;
 
 $resObj = array();
@@ -19,7 +20,7 @@ if (! empty($email) && ! empty($nickname) && ! empty($password)) {
 		if (count($rows) > 0) {
 			$resObj['error'] = 'Email address already used';
 		} else {
-			$stmt = $conn->prepare("INSERT INTO users (email, password, nickname) VALUES (\"{$email}\", \"{$password}\", \"{$nickname}\")");
+			$stmt = $conn->prepare("INSERT INTO users (email, password, nickname, headshot) VALUES (\"{$email}\", \"{$password}\", \"{$nickname}\", \"{$headshot}\")");
 	    	$stmt->execute();
 	    	$stmt = $conn->prepare("SELECT uid FROM users WHERE email=\"$email\"");
 	    	$stmt->execute();
@@ -45,6 +46,7 @@ if (empty($resObj['error'])) { 	// registration successful
 		$resObj['session_cookie'] = $session_cookie;
 		$resObj['persistent'] = 'true';
 		$resObj['nickname'] = $nickname;
+		$resObj['headshot'] = $headshot;
 		$resObj['playerID'] = $playerID;
 	} else {
 		// session key generation fail
